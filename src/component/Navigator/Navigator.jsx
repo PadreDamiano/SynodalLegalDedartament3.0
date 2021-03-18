@@ -18,17 +18,18 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import SearchIcon from '@material-ui/icons/Search';
+import logo from '../Header/logo.png';
 
 const categories = [
     {
         id: 'Судові рішення',
         children: [
-            {id: 'Всі судові рішення', icon: <GavelIcon/>, active: true},
-            {id: 'Єпархії', icon: <AccountBalanceIcon/>},
-            {id: 'Області', icon: <HomeWorkIcon/>},
-            {id: 'Найближчі засідання', icon: <AlarmIcon/>},
-            {id: 'Обрані', icon: <DoneAllIcon/>},
-            { id: 'Пошук', icon: <SearchIcon/>}
+            {id: 'Всі судові рішення', icon: <GavelIcon/>, link: '/all', active: true},
+            {id: 'Єпархії', icon: <AccountBalanceIcon/>, link: '/diocese'},
+            {id: 'Області', icon: <HomeWorkIcon/>, link: '/region'},
+            {id: 'Найближчі засідання', icon: <AlarmIcon/>, link: '/upcoming'},
+            {id: 'Обрані', icon: <DoneAllIcon/>, link: '/favorites'},
+            {id: 'Пошук', icon: <SearchIcon/>, link: '/search'}
         ],
     },
     {
@@ -64,7 +65,6 @@ const styles = (theme) => ({
         paddingBottom: theme.spacing(2),
     },
     firebase: {
-        fontSize: 24,
         color: theme.palette.common.white,
     },
     itemActiveItem: {
@@ -89,18 +89,25 @@ function Navigator(props) {
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
                 <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
-                    Меню
+                    <img src={logo}
+                         height='86'
+                         width='60'
+                         className='display-inline-block align-top'
+                         alt='UOC'
+                    />
                 </ListItem>
-                <ListItem className={clsx(classes.item, classes.itemCategory)}>
+                <ListItem
+                    component="a" href="/"
+                    className={clsx(classes.item, classes.itemCategory)}>
                     <ListItemIcon className={classes.itemIcon}>
-                        <HomeIcon/>
-                    </ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon >
                     <ListItemText
                         classes={{
                             primary: classes.itemPrimary,
                         }}
                     >
-                        Домашня сторінка
+                        Додому
                     </ListItemText>
                 </ListItem>
                 {categories.map(({id, children}) => (
@@ -114,10 +121,10 @@ function Navigator(props) {
                                 {id}
                             </ListItemText>
                         </ListItem>
-                        {children.map(({id: childId, icon, active}) => (
-                            <ListItem
-                                key={childId}
+                        {children.map(({id: childId, icon, link, active}) => (
+                            <ListItem component="a" href={link}
                                 button
+                                key={childId}
                                 className={clsx(classes.item, active && classes.itemActiveItem)}
                             >
                                 <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
