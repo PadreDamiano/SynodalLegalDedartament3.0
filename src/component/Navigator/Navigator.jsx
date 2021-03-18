@@ -26,7 +26,8 @@ const categories = [
             {id: 'Єпархії', icon: <AccountBalanceIcon/>},
             {id: 'Області', icon: <HomeWorkIcon/>},
             {id: 'Найближчі засідання', icon: <AlarmIcon/>},
-            {id: 'Обрані', icon: <DoneAllIcon/>}
+            {id: 'Обрані', icon: <DoneAllIcon/>},
+            { id: 'Пошук', icon: <DoneAllIcon/>}
         ],
     },
     {
