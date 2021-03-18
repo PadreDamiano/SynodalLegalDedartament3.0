@@ -25,19 +25,19 @@ const categories = [
         id: 'Судові рішення',
         children: [
             {id: 'Всі судові рішення', icon: <GavelIcon/>, link: '/all', active: true},
-            {id: 'Єпархії', icon: <AccountBalanceIcon/>, link: '/diocese'},
-            {id: 'Області', icon: <HomeWorkIcon/>, link: '/region'},
-            {id: 'Найближчі засідання', icon: <AlarmIcon/>, link: '/upcoming'},
-            {id: 'Обрані', icon: <DoneAllIcon/>, link: '/favorites'},
-            {id: 'Пошук', icon: <SearchIcon/>, link: '/search'}
+            {id: 'Єпархії', icon: <AccountBalanceIcon/>, link: '/diocese', active: false},
+            {id: 'Області', icon: <HomeWorkIcon/>, link: '/region', active: false},
+            {id: 'Найближчі засідання', icon: <AlarmIcon/>, link: '/upcoming', active: false},
+            {id: 'Обрані', icon: <DoneAllIcon/>, link: '/favorites', active: false},
+            {id: 'Пошук', icon: <SearchIcon/>, link: '/search', active: false}
         ],
     },
     {
         id: 'Додатково',
         children: [
-            {id: 'Аналітика', icon: <AssessmentIcon/>},
-            {id: 'Performance', icon: <TimerIcon/>},
-            {id: 'Звязатися з розробником', icon: <PhonelinkSetupIcon/>},
+            {id: 'Аналітика', icon: <AssessmentIcon/>, link: '/analytics'},
+            {id: 'Performance', icon: <TimerIcon/>, link: '/performance'},
+            {id: 'Звязатися з розробником', icon: <PhonelinkSetupIcon/>, link: '/contact'},
         ],
     },
 ];
@@ -70,6 +70,9 @@ const styles = (theme) => ({
     itemActiveItem: {
         color: '#4fc3f7',
     },
+    itemNotActiveItem: {
+        color: 'rgba(255,255,255,0.7)',
+    },
     itemPrimary: {
         fontSize: 'inherit',
     },
@@ -100,8 +103,8 @@ function Navigator(props) {
                     component="a" href="/"
                     className={clsx(classes.item, classes.itemCategory)}>
                     <ListItemIcon className={classes.itemIcon}>
-                        <HomeIcon />
-                    </ListItemIcon >
+                        <HomeIcon/>
+                    </ListItemIcon>
                     <ListItemText
                         classes={{
                             primary: classes.itemPrimary,
@@ -122,10 +125,12 @@ function Navigator(props) {
                             </ListItemText>
                         </ListItem>
                         {children.map(({id: childId, icon, link, active}) => (
-                            <ListItem component="a" href={link}
+                            <ListItem
+                                component="a" href={link}
                                 button
                                 key={childId}
-                                className={clsx(classes.item, active && classes.itemActiveItem)}
+                                className=
+                                    {clsx(classes.item, active ? classes.itemActiveItem : classes.itemNotActiveItem)}
                             >
                                 <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
                                 <ListItemText
