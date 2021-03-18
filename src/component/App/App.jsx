@@ -8,8 +8,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Hidden from "@material-ui/core/Hidden";
 import Navigator from "../Navigator/Navigator";
 import Header from "../Header/Header";
-import Content from "../Content/Content";
 import {createMuiTheme, ThemeProvider, withStyles} from "@material-ui/core/styles";
+import Appointments from "../Appointments/Appointments";
 
 let theme = createMuiTheme({
     palette: {
@@ -161,7 +161,6 @@ function App(props) {
 
     return (
     <BrowserRouter>
-        <div>
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
@@ -181,17 +180,17 @@ function App(props) {
                 <div className={classes.app}>
                     <Header onDrawerToggle={handleDrawerToggle} />
                     <main className={classes.main}>
-                        <Route path=''
-                               render={() => <Content />}/>
+                        <Route path='/'
+                               render={() => <Appointments />}/>
                         <Route path='/signUp'
-                               render={() => <SignUp/>}/>
+                               render={() => <SignUp />}/>
                         <Route path='/signIn'
-                               render={() => <SignIn/>}/>
+                               render={() => <SignIn />}/>
                     </main>
                 </div>
             </div>
         </ThemeProvider>
-        </div>
+
     </BrowserRouter>
     );
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import Appointments from "../Appointments/Appointments";
 
 const styles = () => ({
     paper: {
@@ -17,7 +16,7 @@ function Content(props) {
 
     return (
         <Paper className={classes.paper}>
-            <Appointments />
+
         </Paper>
     );
 }
