@@ -17,6 +17,7 @@ import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import SearchIcon from '@material-ui/icons/Search';
 
 const categories = [
     {
@@ -27,7 +28,7 @@ const categories = [
             {id: 'Області', icon: <HomeWorkIcon/>},
             {id: 'Найближчі засідання', icon: <AlarmIcon/>},
             {id: 'Обрані', icon: <DoneAllIcon/>},
-            { id: 'Пошук', icon: <DoneAllIcon/>}
+            { id: 'Пошук', icon: <SearchIcon/>}
         ],
     },
     {

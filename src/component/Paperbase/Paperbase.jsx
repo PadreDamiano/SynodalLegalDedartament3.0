@@ -188,6 +188,7 @@ function Paperbase(props) {
                 </nav>
                 <div className={classes.app}>
                     <Header onDrawerToggle={handleDrawerToggle} />
+
                     <main className={classes.main}>
                         <Content />
                     </main>

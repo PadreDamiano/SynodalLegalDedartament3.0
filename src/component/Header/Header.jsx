@@ -76,15 +76,17 @@ function Header(props) {
                         </Hidden>
                         <Grid item xs/>
                         <Grid item>
-                            <Link className={classes.link} href="#" variant="body2">
-                                Go to docs
-                            </Link>
+                            <Tooltip title="Авторизуватися в системі">
+                                <Button  href="/signIn" className={classes.button} variant="outlined" color="inherit" size="small">
+                                    Авторизуватися
+                                </Button>
+                            </Tooltip>
                         </Grid>
                         <Grid item>
-                            <Tooltip title="Alerts • No alerts">
-                                <IconButton color="inherit">
-                                    <NotificationsIcon/>
-                                </IconButton>
+                            <Tooltip title="Реєстрація в системі">
+                                <Button href="/signUp" className={classes.button} variant="outlined" color="inherit" size="small">
+                                    Реєстрація
+                                </Button>
                             </Tooltip>
                         </Grid>
                         <Grid item>
@@ -103,25 +105,13 @@ function Header(props) {
                 elevation={0}
             >
                 <Toolbar>
-                    <Grid container alignItems="center" spacing={1}>
+                     <Grid container alignItems="center" spacing={1}>
                         <Grid item xs>
                             <ThemeProvider theme={theme}>
                                 <Typography color="inherit" variant="h3">
                                     Синодальний юридичний відділ УПЦ
                                 </Typography>
                             </ThemeProvider>
-                        </Grid>
-                        <Grid item>
-                            <Button className={classes.button} variant="outlined" color="inherit" size="small">
-                                Web setup
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <Tooltip title="Help">
-                                <IconButton color="inherit">
-                                    <HelpIcon/>
-                                </IconButton>
-                            </Tooltip>
                         </Grid>
                     </Grid>
                 </Toolbar>

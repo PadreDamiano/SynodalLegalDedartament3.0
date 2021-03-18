@@ -6,10 +6,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import SignUp from "../Sign/SignUp";
 import Paperbase from "../Paperbase/Paperbase";
 
+
+
 function App() {
     return (
         <BrowserRouter>
-            <div className="app-wrapper-content">
+            <div>
                 <Route path=''
                        render={() => <Paperbase />}/>
                 <Route path='/signUp'
