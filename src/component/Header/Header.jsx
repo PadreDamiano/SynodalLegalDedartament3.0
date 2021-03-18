@@ -37,7 +37,7 @@ const styles = (theme) => ({
         marginLeft: -theme.spacing(1),
     },
     iconButtonAvatar: {
-        padding: 4,
+        padding: 10,
     },
     link: {
         textDecoration: 'none',
@@ -88,7 +88,7 @@ function Header(props) {
                         </Grid>
                         <Grid item>
                             <IconButton color="inherit" className={classes.iconButtonAvatar}>
-                                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar"/>
+                                <Avatar src="" alt="My Avatar"/>
                             </IconButton>
                         </Grid>
                     </Grid>

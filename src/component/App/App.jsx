@@ -1,5 +1,5 @@
 import React from "react";
-import './App.css';
+import './App.scss';
 import 'fontsource-roboto';
 import SignIn from "../Sign/SignIn";
 import {BrowserRouter, Route} from "react-router-dom";
@@ -10,6 +10,7 @@ import Navigator from "../Navigator/Navigator";
 import Header from "../Header/Header";
 import {createMuiTheme, ThemeProvider, withStyles} from "@material-ui/core/styles";
 import Appointments from "../Appointments/Appointments";
+import Grid from "@material-ui/core/Grid";
 
 let theme = createMuiTheme({
     palette: {
@@ -190,7 +191,6 @@ function App(props) {
                 </div>
             </div>
         </ThemeProvider>
-
     </BrowserRouter>
     );
 }

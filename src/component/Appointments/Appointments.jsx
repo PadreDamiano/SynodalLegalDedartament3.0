@@ -12,7 +12,6 @@ import CheckboxField from '../Form/CheckboxField/CheckboxField'
 import './Appointments.scss'
 
 import {appointments as data} from '../../lib/MockData'
-import Header from "../Header/Header";
 
 const TITLE = 'Приёмы'
 
