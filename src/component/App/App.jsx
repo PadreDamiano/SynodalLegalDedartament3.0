@@ -10,7 +10,7 @@ import Navigator from "../Navigator/Navigator";
 import Header from "../Header/Header";
 import {createMuiTheme, ThemeProvider, withStyles} from "@material-ui/core/styles";
 import Appointments from "../Appointments/Appointments";
-import Grid from "@material-ui/core/Grid";
+
 
 let theme = createMuiTheme({
     palette: {
@@ -153,45 +153,51 @@ const styles = {
 
 
 function App(props) {
-    const { classes } = props;
+    const {classes} = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
+    const { history } = props
+
     return (
-    <BrowserRouter>
-        <ThemeProvider theme={theme}>
-            <div className={classes.root}>
-                <CssBaseline />
-                <nav className={classes.drawer}>
-                    <Hidden smUp implementation="js">
-                        <Navigator
-                            PaperProps={{ style: { width: drawerWidth } }}
-                            variant="temporary"
-                            open={mobileOpen}
-                            onClose={handleDrawerToggle}
-                        />
-                    </Hidden>
-                    <Hidden xsDown implementation="css">
-                        <Navigator PaperProps={{ style: { width: drawerWidth } }} />
-                    </Hidden>
-                </nav>
-                <div className={classes.app}>
-                    <Header onDrawerToggle={handleDrawerToggle} />
-                    <main className={classes.main}>
-                        <Route path='/'
-                               render={() => <Appointments />}/>
-                        <Route path='/signUp'
-                               render={() => <SignUp />}/>
-                        <Route path='/signIn'
-                               render={() => <SignIn />}/>
-                    </main>
-                </div>
-            </div>
-        </ThemeProvider>
-    </BrowserRouter>
+        <div className="App">
+            <BrowserRouter>
+                <ThemeProvider theme={theme}>
+                    <div className={classes.root}>
+                        <CssBaseline/>
+                        <nav className={classes.drawer}>
+                            <Hidden smUp implementation="js">
+                                <Navigator
+                                    PaperProps={{style: {width: drawerWidth}}}
+                                    variant="temporary"
+                                    open={mobileOpen}
+                                    onClose={handleDrawerToggle}
+                                />
+                            </Hidden>
+                            <Hidden xsDown implementation="css">
+                                <Navigator PaperProps={{style: {width: drawerWidth}}}/>
+                            </Hidden>
+                        </nav>
+                        <div className={classes.app}>
+                            <Header onDrawerToggle={handleDrawerToggle}/>
+                            <main className={classes.main}>
+                                <Route history={history} path='/all'
+                                       render={() => <Appointments/>}/>
+                                <Route history={history} path='/signUp'
+                                       render={() => <SignUp/>}/>
+                                <Route history={history} path='/signIn'
+                                       render={() => <SignIn/>}/>
+{/*                                // Задает по умолчанию страницу
+                                <Redirect from='/' to='/SignIn'/>*/}
+                            </main>
+                        </div>
+                    </div>
+                </ThemeProvider>
+            </BrowserRouter>
+        </div>
     );
 }
 

@@ -13,6 +13,8 @@
     "classnames": "^2.2.6",
     "flexbox": "0.0.3",
     "fontsource-roboto": "^4.0.0",
+    "history": "^5.0.0",
+    "history-router": "^2.4.0",
     "moment": "^2.29.1",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
