@@ -4,6 +4,7 @@ import App from './component/App/App';
 import 'bootstrap/dist/css/bootstrap.css'
 import {createBrowserHistory} from "history";
 
+// создаём кастомную историю
 const history = createBrowserHistory();
 
 ReactDOM.render(

@@ -3,15 +3,21 @@ import React, {Component} from 'react'
 import {Form} from 'reactstrap'
 import Moment from 'react-moment'
 import {map, filter} from 'underscore'
+import { Button } from 'reactstrap'
 
 import Table from '../Table/Table'
 import TextField from '../Form/TextField/TextField'
 import DateField from '../Form/DateField/DateField'
 import CheckboxField from '../Form/CheckboxField/CheckboxField'
 
+import Loader from '../Loader/Loader'
+
 import './Appointments.scss'
 
-import {appointments as data} from '../../lib/MockData'
+import {appointments as data} from '../../lib/mock/MockData'
+import service from '../../services/AppointmentService'
+
+import { ReactComponent as Search } from '../../images/search.svg'
 
 const TITLE = 'Приёмы'
 
@@ -20,6 +26,9 @@ const USER = 'Иванов Иван Иванович'
 export default class Appointments extends Component {
 
     state = {
+        data: null,
+        isLoading: false,
+
         filter: {
             startDate: null,
             endDate: null,
@@ -28,36 +37,55 @@ export default class Appointments extends Component {
         }
     }
 
+    componentDidMount() {
+        this.load()
+    }
+
     onChangeFilterField = (name, value) => {
-        const {filter} = this.state
+        const { filter } = this.state
 
         this.setState({
-            filter: {...filter, ...{[name]: value}}
+            filter: { ...filter, ...{ [name]: value } }
         })
     }
 
     onChangeFilterDateField = (name, value) => {
-        const {filter} = this.state
+        const { filter } = this.state
 
         this.setState({
-            filter: {...filter, ...{[name]: value && value.getTime()}}
+            filter: { ...filter, ...{ [name]: value && value.getTime() } }
         })
+    }
+
+    onSearch = () => {
+        this.load()
+    }
+
+    load() {
+        this.setState({ isLoading: true })
+
+        service
+            .find({ filter: this.state.filter })
+            .then(({ success, data }) => {
+                if (success) {
+                    this.setState({
+                        data, isLoading: false
+                    })
+                }
+            })
     }
 
     render() {
         const {
-            startDate,
-            endDate,
-            clientName,
-            onlyMe,
-        } = this.state.filter
-
-        let filtered = filter(data, o => {
-            return (startDate ? o.date >= startDate : true) &&
-                (endDate ? o.date <= endDate : true) &&
-                (clientName ? (clientName.length > 2 ? o.clientName.includes(clientName) : true) : true) &&
-                (onlyMe ? o.holderName === USER : true)
-        })
+            data,
+            isLoading,
+            filter: {
+                startDate,
+                endDate,
+                clientName,
+                onlyMe,
+            }
+        } = this.state
 
         return (
             <div className='Appointments'>
@@ -98,58 +126,67 @@ export default class Appointments extends Component {
                                 className='Appointments-FilterField'
                                 onChange={this.onChangeFilterField}
                             />
+                            <Button
+                                className='Appointments-SearchBtn'
+                                onClick={this.onSearch}>
+                                <Search className='Appointments-SearchBtnIcon'/>
+                            </Button>
                         </Form>
                     </div>
-                    <Table
-                        data={filtered}
-                        className='AppointmentList'
-                        columns={[
-                            {
-                                dataField: 'date',
-                                text: 'Дата',
-                                headerStyle: {
-                                    width: '150px'
+                    {isLoading ? (
+                        <Loader />
+                    ) : data ? (
+                        <Table
+                            data={data}
+                            className='AppointmentList'
+                            columns={[
+                                {
+                                    dataField: 'date',
+                                    text: 'Дата',
+                                    headerStyle: {
+                                        width: '150px'
+                                    },
+                                    formatter: (v, row) => {
+                                        return (
+                                            <Moment date={v} format='DD.MM.YYYY HH.mm' />
+                                        )
+                                    }
                                 },
-                                formatter: (v, row) => {
-                                    return (
-                                        <Moment date={v} format='DD.MM.YYYY HH.mm'/>
-                                    )
+                                {
+                                    dataField: 'clientName',
+                                    text: 'Клиент',
+                                    headerStyle: {
+                                        width: '300px'
+                                    }
+                                },
+                                {
+                                    dataField: 'status',
+                                    text: 'Статус'
+                                },
+                                {
+                                    dataField: 'holderName',
+                                    text: 'Принимающий',
+                                    headerStyle: {
+                                        width: '300px'
+                                    }
+                                },
+                                {
+                                    dataField: 'compliences',
+                                    text: 'Жалобы',
+                                    headerStyle: {
+                                        width: '200px'
+                                    }
+                                },
+                                {
+                                    dataField: 'diagnosis',
+                                    text: 'Диагноз',
+                                    headerStyle: {
+                                        width: '200px'
+                                    }
                                 }
-                            },
-                            {
-                                dataField: 'clientName',
-                                text: 'Клиент',
-                                headerStyle: {
-                                    width: '300px'
-                                }
-                            },
-                            {
-                                dataField: 'status',
-                                text: 'Статус'
-                            },
-                            {
-                                dataField: 'holderName',
-                                text: 'Принимающий',
-                                headerStyle: {
-                                    width: '300px'
-                                }
-                            },
-                            {
-                                dataField: 'compliences',
-                                text: 'Жалобы',
-                                headerStyle: {
-                                    width: '200px'
-                                }
-                            },
-                            {
-                                dataField: 'diagnosis',
-                                text: 'Диагноз',
-                                headerStyle: {
-                                    width: '200px'
-                                }
-                            }
-                        ]}
-                    />
+                            ]}
+                        />
+                    ) : 'Нет данных'}
                 </div>
             </div>
         )
