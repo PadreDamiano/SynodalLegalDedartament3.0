@@ -29,8 +29,10 @@
     "react-scripts": "4.0.3",
     "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
+    "superagent": "^6.1.0",
     "underscore": "^1.12.1",
     "underscore-node": "^0.1.2",
+    "url-pattern": "^1.0.3",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
