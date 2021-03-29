@@ -9,7 +9,8 @@ import Hidden from "@material-ui/core/Hidden";
 import Navigator from "../Navigator/Navigator";
 import Header from "../Header/Header";
 import {createMuiTheme, ThemeProvider, withStyles} from "@material-ui/core/styles";
-import Appointments from "../Appointments/Appointments";
+import Appointments from "../../containers/Appointments/Appointments"
+
 
 
 let theme = createMuiTheme({
@@ -161,7 +162,6 @@ function App(props) {
     };
 
     const { history } = props
-
     return (
         <div className="App">
             <BrowserRouter>

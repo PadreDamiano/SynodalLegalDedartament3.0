@@ -1,9 +1,12 @@
 import * as mock from './MockData'
+
+import directoryController from './controllers/DirectoryController'
 import appointmentController from './controllers/AppointmentController'
 
 const RESPONSE_DELAY = 1000
 
 const ROUTING = {
+    [directoryController.getPath()]: directoryController,
     [appointmentController.getPath()]: appointmentController
 }
 
