@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import Immutable from 'immutable'
 
 import InitialState from './AppointmentListInitialState'
