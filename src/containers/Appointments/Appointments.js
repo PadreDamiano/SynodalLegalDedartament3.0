@@ -15,14 +15,11 @@ import CheckboxField from '../../component/Form/CheckboxField/CheckboxField'
 
 import './Appointments.scss'
 
-import LoadAppointmentStatusesAction from '../../actions/directory/LoadAppointmentStatusesAction'
 
 import * as appointmentListActions from '../../redux/appointment/list/appointmentListAction'
+import * as appointmentStatusListActions from '../../redux/directory/appointment/status/list/appointmentStatusListActions'
 
 import { ReactComponent as Search } from '../../images/search.svg'
-
-import { ReactComponent as Appointment } from '../../images/loader.svg'
-
 const TITLE = 'Приёмы'
 
 const USER = 'Иванов Иван Иванович'
@@ -43,7 +40,11 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            ...bindActionCreators(appointmentListActions, dispatch)
+            ...bindActionCreators(appointmentListActions, dispatch),
+
+            status: {
+                list: bindActionCreators(appointmentStatusListActions, dispatch)
+            }
         }
     }
 }
@@ -52,28 +53,40 @@ class Appointments extends Component {
 
     componentDidMount() {
         this.load()
+        this.loadStatuses()
     }
 
     onChangeFilterField = (name, value) => {
-        this.actions.changeFilterField(name, value)
+        this.changeFilterField(name, value)
     }
 
     onChangeFilterDateField = (name, value) => {
-        this.actions.changeFilterField(name, value && value.getTime())
+        this.changeFilterField(name, value && value.getTime())
     }
 
     onSearch = () => {
         this.load()
     }
 
-    get actions () {
-        return this.props.actions
+    load() {
+        const {
+            actions,
+            dataSource: ds
+        } = this.props
+
+        actions.load({
+            ...ds.filter.toJS()
+        })
     }
 
-    load() {
-        this.actions.load({
-            ...this.props.dataSource.filter.toJS()
-        })
+    loadStatuses () {
+        this.props.actions.status.list.load()
+    }
+
+    changeFilterField (name, value, shouldReload) {
+        this.props
+            .actions
+            .changeFilterField(name, value, shouldReload)
     }
 
     render() {
@@ -97,7 +110,6 @@ class Appointments extends Component {
             <div className='Appointments'>
                 <div className='Appointments-Body'>
                     <div className='Appointments-Filter'>
-                        <LoadAppointmentStatusesAction/>
                         <Form className='Appointments-FilterForm'>
                             <DateField
                                 hasTime

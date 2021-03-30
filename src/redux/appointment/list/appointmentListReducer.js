@@ -2,7 +2,7 @@ import Immutable from 'immutable'
 
 import InitialState from './AppointmentListInitialState'
 
-import { ACTION_TYPES } from '../../../lib/Constans'
+import { ACTION_TYPES } from '../../../lib/Constants'
 
 const {
     CLEAN_APPOINTMENT_LIST_ERROR,

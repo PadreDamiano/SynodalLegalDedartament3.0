@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from '../../../lib/Constans'
+import { ACTION_TYPES } from '../../../lib/Constants'
 
 import service from '../../../services/AppointmentService'
 

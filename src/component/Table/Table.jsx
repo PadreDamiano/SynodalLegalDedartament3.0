@@ -1,12 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import cn from 'classnames';
-import PropTypes from 'prop-types';
-import BootstrapTable from 'react-bootstrap-table-next';
+import cn from 'classnames'
+import PropTypes from 'prop-types'
+import BootstrapTable from 'react-bootstrap-table-next'
 
-import './Table.scss';
+import './Table.scss'
 
-const NO_DATA_TEXT = 'Данных нет';
+import { ReactComponent as LoaderImg } from '../../images/loader.svg'
+
+const NO_DATA_TEXT = 'Данных нет'
+
+function renderLoadingIndication () {
+    return (
+        <div className='Table-Loader'>
+            <LoaderImg className='Table-LoaderImg'/>
+        </div>
+    )
+}
 
 export default class Table extends Component {
 
@@ -20,6 +30,7 @@ export default class Table extends Component {
         hasOptions: PropTypes.bool,
         hasBorders: PropTypes.bool,
 
+        isLoading: PropTypes.bool,
         isStriped: PropTypes.bool,
 
         expandRow: PropTypes.object,
@@ -45,11 +56,16 @@ export default class Table extends Component {
         hasBorders: false,
 
         getRowStyle: function() { return null }
-    };
+    }
+
+    onRefresh = (type, { page }) => {
+        this.props.onRefresh(page)
+    }
 
     getRowStyle = (row, rowIndex) => {
         return this.props.getRowStyle(row, rowIndex)
-    };
+    }
+
     render() {
         const {
             data,
@@ -58,17 +74,18 @@ export default class Table extends Component {
             expandRow,
             className,
             containerClass,
+            isLoading,
             isStriped,
             hasBorders,
             hasHover,
             noDataText,
-        } = this.props;
+        } = this.props
 
         return (
             <div className={cn('TableContainer', containerClass)}>
                 <BootstrapTable
                     expandRow={expandRow}
-                    data={data}
+                    data={isLoading ? [] : data}
                     columns={columns}
                     keyField={keyField}
                     classes={cn('Table', className)}
@@ -77,7 +94,7 @@ export default class Table extends Component {
                     hover={hasHover}
                     bordered={hasBorders}
                     rowStyle={this.getRowStyle}
-                    noDataIndication={noDataText}
+                    noDataIndication={isLoading ? renderLoadingIndication : noDataText}
                 />
             </div>
         )

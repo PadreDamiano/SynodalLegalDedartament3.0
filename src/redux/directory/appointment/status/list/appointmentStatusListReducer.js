@@ -1,6 +1,6 @@
 import InitialState from './AppointmentStatusListInitialState'
 
-import { ACTION_TYPES } from '../../../../../lib/Constans'
+import { ACTION_TYPES } from '../../../../../lib/Constants'
 
 const {
     CLEAR_APPOINTMENT_STATUS_LIST,

@@ -26,6 +26,7 @@ function getInitialState () {
 
 // создаём кастомную историю
 const history = createBrowserHistory()
+
 const store = createStore(
     rootReducer(history),
     getInitialState(),

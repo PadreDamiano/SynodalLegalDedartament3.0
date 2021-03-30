@@ -22,7 +22,6 @@ const notImplementedTemplates = [
 function onSuccess(response) {
     let parsed = {}
 
-// парсим JSON-строку ответа сервера вручную
     try {
         parsed = JSON.parse(response.text)
     } catch (e) {
