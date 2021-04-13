@@ -185,7 +185,14 @@ class Appointments extends Component {
                             },
                             {
                                 dataField: 'clientName',
-                                text: 'Клиент',
+                                text: 'Позивач',
+                                headerStyle: {
+                                    width: '300px'
+                                }
+                            },
+                            {
+                                dataField: 'holderName',
+                                text: 'Відповідач',
                                 headerStyle: {
                                     width: '300px'
                                 }
@@ -195,22 +202,15 @@ class Appointments extends Component {
                                 text: 'Статус'
                             },
                             {
-                                dataField: 'holderName',
-                                text: 'Принимающий',
-                                headerStyle: {
-                                    width: '300px'
-                                }
-                            },
-                            {
                                 dataField: 'compliences',
-                                text: 'Жалобы',
+                                text: 'С',
                                 headerStyle: {
                                     width: '200px'
                                 }
                             },
                             {
                                 dataField: 'diagnosis',
-                                text: 'Диагноз',
+                                text: 'Вирок суду',
                                 headerStyle: {
                                     width: '200px'
                                 }
