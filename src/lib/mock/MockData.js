@@ -39,6 +39,7 @@ const appointments = [
         compliences: 'Тошнота',
         diagnosis: 'Ротавирус'
     },
+
 ]
 
 const appointmentStatuses = [
